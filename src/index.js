@@ -8,10 +8,11 @@ import './config/ReactotronConfig';
 import Routes from './routes';
 
 export default function App() {
+  const signedIn = true;
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" backgroundColor="#5667f9" />
-      <Routes />
+      <Routes initialRoute={signedIn ? 'Home' : 'SignIn'} />
     </NavigationContainer>
   );
 }
