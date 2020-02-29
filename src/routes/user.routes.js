@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Message from '../pages/User/Message';
-import Setting from '../pages/User/Setting';
-import User from '../pages/User';
+import Message from '~/pages/User/Message';
+import Setting from '~/pages/User/Setting';
+import User from '~/pages/User';
 
 const Tab = createBottomTabNavigator();
 
