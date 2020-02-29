@@ -22,8 +22,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react',
-    'prettier'
+    'react', "jsx-a11y", "import", 'prettier', 'import-helpers',
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -37,7 +36,20 @@ module.exports = {
     'no-underscore-dangle': 'off',
     camelcase: 'off',
 
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'import-helpers/order-imports': [
+      'warn',
+      { // example configuration
+          newlinesBetween: 'always',
+          groups: [
+              '/^react/',
+              'module',
+              '/^~/',
+              ['parent', 'sibling', 'index'],
+          ],
+          alphabetize: { order: 'asc', ignoreCase: true },
+      },
+    ],
   },
   settings: {
     'import/resolver': {
