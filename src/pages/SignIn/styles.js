@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import styled from 'styled-components/native';
 
@@ -12,11 +13,11 @@ export const Container = styled.KeyboardAvoidingView.attrs({
   background-color: #19181f;
 `;
 
-export const Content = styled.View`
+export const Content = styled(SafeAreaView)`
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  padding: 20px 30px;
 `;
 
 export const Title = styled.Text`

@@ -28,7 +28,9 @@ export default function SignIn() {
   return (
     <Container>
       <Content>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ width: '100%' }}>
           <Img source={Logo} />
           <Title>Bem-vindo ao SuaLogo</Title>
           <Subtitle>
@@ -44,6 +46,7 @@ export default function SignIn() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
+              returnKeyType="next"
             />
             <Input
               placeholder="Sua senha"
