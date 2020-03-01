@@ -1,32 +1,41 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Home from '~/pages/Home';
 import UserRoutes from '~/routes/user.routes';
 
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function DashboardRoutes() {
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#5667f9" />
-      <Stack.Navigator
+      <Drawer.Navigator
         initialRouteName="Home"
+        drawerType="slide"
+        hideStatusBar={false}
         screenOptions={{
-          headerStyle: { backgroundColor: '#5667f9' },
-          headerTintColor: '#ffffff',
-          headerTitleAlign: 'center',
-          headerBackTitleVisible: false,
+          drawerPosition: 'left',
+        }}
+        drawerStyle={{
+          backgroundColor: '#19181f',
+        }}
+        drawerContentOptions={{
+          activeTintColor: '#FFF',
+          inactiveTintColor: '#757575',
+          activeBackgroundColor: 'rgba(86,103,249,0.1)',
         }}>
-        <Stack.Screen
+        <Drawer.Screen
           name="Home"
+          options={{
+            title: 'Dashboard',
+          }}
           component={Home}
-          options={{ title: 'Dashboard' }}
         />
-        <Stack.Screen name="User" component={UserRoutes} />
-      </Stack.Navigator>
+        <Drawer.Screen name="User" component={UserRoutes} />
+      </Drawer.Navigator>
     </>
   );
 }
