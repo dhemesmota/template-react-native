@@ -3,7 +3,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import PropTypes from 'prop-types';
 
-import SignIn from './routes/auth.routes';
+import AuthRoutes from './routes/auth.routes';
 import DashboardRoutes from './routes/dashboard.routes';
 
 const Stack = createStackNavigator();
@@ -19,7 +19,7 @@ export default function Routes({ initialRoute }) {
         headerTitleAlign: 'center',
         headerBackTitleVisible: false,
       }}>
-      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="SignIn" component={AuthRoutes} />
       <Stack.Screen name="Home" component={DashboardRoutes} />
     </Stack.Navigator>
   );

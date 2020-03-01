@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -9,20 +10,23 @@ const Stack = createStackNavigator();
 
 export default function DashboardRoutes() {
   return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerStyle: { backgroundColor: '#5667f9' },
-        headerTintColor: '#ffffff',
-        headerTitleAlign: 'center',
-        headerBackTitleVisible: false,
-      }}>
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ title: 'Dashboard' }}
-      />
-      <Stack.Screen name="User" component={UserRoutes} />
-    </Stack.Navigator>
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#5667f9" />
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#5667f9' },
+          headerTintColor: '#ffffff',
+          headerTitleAlign: 'center',
+          headerBackTitleVisible: false,
+        }}>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: 'Dashboard' }}
+        />
+        <Stack.Screen name="User" component={UserRoutes} />
+      </Stack.Navigator>
+    </>
   );
 }
