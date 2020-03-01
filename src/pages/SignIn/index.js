@@ -28,7 +28,7 @@ export default function SignIn() {
   return (
     <Container>
       <Content>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Img source={Logo} />
           <Title>Bem-vindo ao SuaLogo</Title>
           <Subtitle>
