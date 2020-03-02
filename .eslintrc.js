@@ -22,7 +22,7 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
-    'react', "jsx-a11y", "import", 'prettier', 'import-helpers',
+    'react', 'jsx-a11y', 'import', 'react-hooks', 'prettier', 'import-helpers',
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -35,7 +35,9 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-underscore-dangle': 'off',
     camelcase: 'off',
-
+    'no-console': ['error', { allow: ['tron'] }],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-props-no-spreading': 'off',
     'import-helpers/order-imports': [
       'warn',
