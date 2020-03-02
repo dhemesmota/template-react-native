@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import IconWithBadge from '~/components/Icon/IconWithBadge';
 import User from '~/pages/User';
 import Message from '~/pages/User/Message';
 import Setting from '~/pages/User/Setting';
@@ -31,7 +32,12 @@ export default function UserRoutes() {
         component={Message}
         options={{
           tabBarIcon: ({ color }) => (
-            <Icon name="message-circle" size={20} color={color} />
+            <IconWithBadge
+              badgeCount={5}
+              name="message-circle"
+              size={20}
+              color={color}
+            />
           ),
         }}
       />
