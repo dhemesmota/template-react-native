@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
+import * as Yup from 'yup';
 
 import Logo from '~/assets/logo/logo.png';
 import Button from '~/components/Button';
@@ -22,8 +23,51 @@ export default function SignUp() {
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
-  function handleSubmit(data) {
-    console.tron.log(data);
+  async function handleSubmit(data) {
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required('O nome é obrigatório'),
+        email: Yup.string()
+          .email('E-mail inválido')
+          .required('O e-mail é obrigatório'),
+        password: Yup.string()
+          .min(6, 'No mínimo 6 caracteres')
+          .required('A senha é obrigatória'),
+        password_confirmation: Yup.string().when(
+          'password',
+          (password, field) =>
+            password
+              ? field
+                  .required('Confirmação de senha é óbrigatória')
+                  .oneOf(
+                    [Yup.ref('password')],
+                    'A confirmação de senha deve ser igual a nova senha',
+                  )
+              : field,
+        ),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      console.tron.log(data);
+
+      formRef.current.setErrors({});
+      formRef.current.reset();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        err.inner.forEach(error => {
+          errorMessages[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(errorMessages);
+
+        console.tron.warn(err);
+      }
+    }
   }
   return (
     <Container>
@@ -44,6 +88,9 @@ export default function SignUp() {
               autoCompleteType="name"
               autoFocus
               returnKeyType="next"
+              onSubmitEditing={() =>
+                formRef.current.getFieldRef('email').focus()
+              }
             />
             <Input
               placeholder="Digite seu e-mail"
@@ -54,6 +101,9 @@ export default function SignUp() {
               autoCorrect={false}
               autoCapitalize="none"
               returnKeyType="next"
+              onSubmitEditing={() =>
+                formRef.current.getFieldRef('password').focus()
+              }
             />
             <Input
               placeholder="Sua senha"
@@ -62,6 +112,9 @@ export default function SignUp() {
               type="password"
               secureTextEntry
               returnKeyType="next"
+              onSubmitEditing={() =>
+                formRef.current.getFieldRef('password_confirmation').focus()
+              }
             />
             <Input
               placeholder="Confirme sua senha"
@@ -70,6 +123,7 @@ export default function SignUp() {
               type="password"
               secureTextEntry
               returnKeyType="send"
+              onSubmitEditing={() => formRef.current.submitForm()}
             />
 
             <SignLink

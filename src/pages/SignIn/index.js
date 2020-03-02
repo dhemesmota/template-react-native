@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
+import * as Yup from 'yup';
 
 import Logo from '~/assets/logo/logo.png';
 import Button from '~/components/Button';
@@ -22,8 +23,36 @@ export default function SignIn() {
   const formRef = useRef(null);
   const { navigate } = useNavigation();
 
-  function handleSubmit(data) {
-    console.tron.log(data);
+  async function handleSubmit(data) {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .email('E-mail inválido')
+          .required('O e-mail é obrigatório'),
+        password: Yup.string().required('A senha é obrigatória'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      console.tron.log(data);
+
+      formRef.current.setErrors({});
+      formRef.current.reset();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        err.inner.forEach(error => {
+          errorMessages[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(errorMessages);
+
+        console.tron.warn(err);
+      }
+    }
   }
   return (
     <Container>
@@ -42,18 +71,21 @@ export default function SignIn() {
               placeholder="Digite seu e-mail"
               icon="mail"
               name="email"
-              type="email"
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
               returnKeyType="next"
+              onSubmitEditing={() =>
+                formRef.current.getFieldRef('password').focus()
+              }
             />
             <Input
               placeholder="Sua senha"
               icon="lock"
               name="password"
-              type="password"
               secureTextEntry
+              returnKeyType="send"
+              onSubmitEditing={() => formRef.current.submitForm()}
             />
 
             <SignLink

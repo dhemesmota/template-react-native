@@ -19,8 +19,11 @@ export default function Routes({ initialRoute }) {
         headerTitleAlign: 'center',
         headerBackTitleVisible: false,
       }}>
-      <Stack.Screen name="SignIn" component={AuthRoutes} />
-      <Stack.Screen name="Home" component={DashboardRoutes} />
+      {initialRoute === 'SignIn' ? (
+        <Stack.Screen name="SignIn" component={AuthRoutes} />
+      ) : (
+        <Stack.Screen name="Home" component={DashboardRoutes} />
+      )}
     </Stack.Navigator>
   );
 }

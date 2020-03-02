@@ -23,14 +23,14 @@ export default function Input({ style, name, label, icon, ...rest }) {
         ref._lastNativeText = value;
       },
       clearValue(ref) {
-        ref.setNativeProps({ text: 1 });
+        ref.setNativeProps({ text: '' });
         ref._lastNativeText = '';
       },
     });
   }, [fieldName, registerField]);
 
   return (
-    <Container style={style}>
+    <Container style={style} error={error}>
       {label && <Label>{label}</Label>}
 
       {icon && <Icon name={icon} size={20} color="#333040" />}
