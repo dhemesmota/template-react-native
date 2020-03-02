@@ -1,33 +1,22 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { createStackNavigator } from '@react-navigation/stack';
-import PropTypes from 'prop-types';
 
 import AuthRoutes from './routes/auth.routes';
 import DashboardRoutes from './routes/dashboard.routes';
 
 const Stack = createStackNavigator();
 
-export default function Routes({ initialRoute }) {
+export default function Routes() {
+  const signed = useSelector(state => state.auth.signed);
   return (
-    <Stack.Navigator
-      initialRouteName={initialRoute}
-      headerMode="none"
-      screenOptions={{
-        headerStyle: { backgroundColor: '#5667f9' },
-        headerTintColor: '#ffffff',
-        headerTitleAlign: 'center',
-        headerBackTitleVisible: false,
-      }}>
-      {initialRoute === 'SignIn' ? (
-        <Stack.Screen name="SignIn" component={AuthRoutes} />
-      ) : (
+    <Stack.Navigator headerMode="none">
+      {signed ? (
         <Stack.Screen name="Home" component={DashboardRoutes} />
+      ) : (
+        <Stack.Screen name="SignIn" component={AuthRoutes} />
       )}
     </Stack.Navigator>
   );
 }
-
-Routes.propTypes = {
-  initialRoute: PropTypes.string.isRequired,
-};

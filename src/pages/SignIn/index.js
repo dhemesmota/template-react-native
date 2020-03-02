@@ -1,13 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import * as Yup from 'yup';
 
 import Logo from '~/assets/logo/logo.png';
 import Button from '~/components/Button';
 import Input from '~/components/Form/Input';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -22,6 +24,15 @@ import {
 export default function SignIn() {
   const formRef = useRef(null);
   const { navigate } = useNavigation();
+  const dispatch = useDispatch();
+
+  const loading = useSelector(state => state.auth.loading);
+
+  const focus = useIsFocused();
+  useEffect(() => {
+    formRef.current.setErrors({});
+    formRef.current.reset();
+  }, [focus]);
 
   async function handleSubmit(data) {
     try {
@@ -37,6 +48,10 @@ export default function SignIn() {
       });
 
       console.tron.log(data);
+
+      const { email, password } = data;
+
+      dispatch(signInRequest(email, password));
 
       formRef.current.setErrors({});
       formRef.current.reset();
@@ -98,7 +113,8 @@ export default function SignIn() {
             <Button
               style={{ marginTop: 40 }}
               type="submit"
-              onPress={() => formRef.current.submitForm()}>
+              onPress={() => formRef.current.submitForm()}
+              loading={loading}>
               Entrar
             </Button>
           </Form>
