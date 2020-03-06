@@ -13,9 +13,9 @@ export default function Routes() {
   return (
     <Stack.Navigator headerMode="none">
       {signed ? (
-        <Stack.Screen name="Home" component={DashboardRoutes} />
+        <Stack.Screen name="Home" component={DashboardRoutes} options={{ animationEnabled: false }} />
       ) : (
-        <Stack.Screen name="SignIn" component={AuthRoutes} />
+        <Stack.Screen name="SignIn" component={AuthRoutes} options={{ animationEnabled: false }} />
       )}
     </Stack.Navigator>
   );
