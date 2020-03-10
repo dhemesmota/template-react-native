@@ -20,7 +20,7 @@ export default function Home() {
       <Button
         title="Go to user"
         onPress={() => {
-          navigate('User', { screen: 'Settings' });
+          navigate('User', { screen: 'Settings', user: 'Dhemes' });
         }}
       />
     </Container>

@@ -4,7 +4,7 @@ export const Container = styled.View`
   width: 100%;
   height: 50px;
   border: 2px solid
-    ${props => (props.error ? 'rgba(2020, 61, 61, 0.3)' : '#28272c')};
+    ${props => (props.error ? 'rgba(202, 61, 61, 0.3)' : '#28272c')};
   padding: 0 15px;
   border-radius: 5px;
 
