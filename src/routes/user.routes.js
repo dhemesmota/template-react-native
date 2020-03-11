@@ -22,6 +22,7 @@ export default function UserRoutes() {
         name="Profile"
         component={User}
         options={{
+          tabBarLabel: 'Meu Perfil',
           tabBarIcon: ({ color }) => (
             <Icon name="user" size={20} color={color} />
           ),
@@ -31,6 +32,7 @@ export default function UserRoutes() {
         name="Messages"
         component={Message}
         options={{
+          tabBarLabel: 'Mensagens',
           tabBarIcon: ({ color }) => (
             <IconWithBadge
               badgeCount={5}
@@ -45,6 +47,7 @@ export default function UserRoutes() {
         name="Settings"
         component={Setting}
         options={{
+          tabBarLabel: 'Configurações',
           tabBarIcon: ({ color }) => (
             <Icon name="settings" size={20} color={color} />
           ),
