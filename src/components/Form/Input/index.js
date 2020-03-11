@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 
-import { useField } from '@unform/core';
 import PropTypes from 'prop-types';
+
+import { useField } from '@unform/core';
 
 import { Container, TInput, Label, Error } from './styles';
 

@@ -46,6 +46,7 @@ module.exports = {
           groups: [
               '/^react/',
               'module',
+              '/^@/',
               '/^~/',
               ['parent', 'sibling', 'index'],
           ],
