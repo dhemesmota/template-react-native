@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 export default function AuthRoutes() {
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#19181F" />
+      <StatusBar barStyle="light-content"  backgroundColor="transparent" translucent />
       <Stack.Navigator initialRouteName="SignIn" headerMode="none">
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
