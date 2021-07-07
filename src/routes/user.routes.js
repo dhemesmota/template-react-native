@@ -6,8 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import IconWithBadge from '~/components/Icon/IconWithBadge';
 import User from '~/pages/User';
-import Message from '~/pages/User/Message';
 import Setting from '~/pages/User/Setting';
+import Message from '~/routes/message.routes';
 
 const Tab = createBottomTabNavigator();
 

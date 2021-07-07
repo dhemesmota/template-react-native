@@ -1,8 +1,10 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+import CustomDrawerContent from '~/layouts/router/CustomDrawerContent';
 import Home from '~/pages/Home';
 import UserRoutes from '~/routes/user.routes';
 
@@ -11,30 +13,38 @@ const Drawer = createDrawerNavigator();
 export default function DashboardRoutes() {
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#5667f9" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <Drawer.Navigator
+        drawerContent={props => <CustomDrawerContent {...props} />}
         initialRouteName="Home"
-        drawerType="slide"
-        hideStatusBar={false}
+        drawerType="front"
+        hideStatusBar
         screenOptions={{
           drawerPosition: 'left',
         }}
         drawerStyle={{
-          backgroundColor: '#19181f',
-        }}
-        drawerContentOptions={{
-          activeTintColor: '#FFF',
-          inactiveTintColor: '#757575',
-          activeBackgroundColor: 'rgba(86,103,249,0.1)',
+          width: 280,
         }}>
         <Drawer.Screen
           name="Home"
           options={{
             title: 'Dashboard',
+            drawerIcon: ({ color }) => (
+              <Icon name="user" size={20} color={color} />
+            ),
           }}
           component={Home}
         />
-        <Drawer.Screen name="User" component={UserRoutes} />
+        <Drawer.Screen
+          name="User"
+          component={UserRoutes}
+          options={{
+            title: 'Perfil',
+            drawerIcon: ({ color }) => (
+              <Icon name="user" size={20} color={color} />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </>
   );
